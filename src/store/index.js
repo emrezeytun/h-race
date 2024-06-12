@@ -63,6 +63,7 @@ const store = new Vuex.Store({
       });
       state.isRaceStarted = false;
       state.currentLapIndex = 0;
+      state.isRaceFinished = false
     },
   },
   actions: {

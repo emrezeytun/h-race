@@ -65,8 +65,8 @@ export default {
 <style lang="scss">
 .horse-lap {
   &-tables {
-    max-height: 90vh;
-    height: 90vh;
+    max-height: 80vh;
+    height: 80vh;
     overflow: auto;
     &-item {
       &-title {

@@ -1,7 +1,6 @@
 <template>
   <div class="horse-header">
     <div class="horse-header-title">Horse Racing</div>
-    <div @click="playAgain" class="">Play Again</div>
     <div class="horse-header-actions">
       <button
         @click="updateLapData"
@@ -10,12 +9,14 @@
       >
         Generate Program
       </button>
+      
       <button
-        @click="startRace(isRaceStarted ? false : true)"
+        @click="isRaceFinished ? playAgain() : startRace(isRaceStarted ? false : true)"
         class="horse-header-actions-item"
         :class="getPrograms.length ? '' : 'disable'"
       >
-        {{ isRaceStarted ? "Pause" : "Start" }}
+      
+        {{ isRaceFinished ? 'Play Again' : isRaceStarted ? "Pause" :   "Start" }}
       </button>
     </div>
   </div>
@@ -40,6 +41,10 @@ export default {
     isRaceStarted() {
       return this.$store.state.isRaceStarted;
     },
+    isRaceFinished() {
+      console.log('aaa', this.$store.state.isRaceFinished)
+      return this.$store.state.isRaceFinished;
+    }
   },
   methods: {
     updateLapData() {

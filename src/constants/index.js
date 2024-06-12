@@ -7,7 +7,7 @@ const horseCountPerLap = 10;
 const horseList = [
   { id: 101, name: "Mystic Shadow", condition: 70, color: "blue" },
   { id: 102, name: "Obsidian Heart", condition: 70, color: "green" },
-  { id: 103, name: "Eclipse Moon", condition: 70, color: "yellow" },
+  { id: 103, name: "Eclipse Moon", condition: 70, color: "black" },
   { id: 104, name: "Ruby Flame", condition: 70, color: "purple" },
   { id: 105, name: "Silver Arrow", condition: 70, color: "orange" },
   { id: 106, name: "Golden Blaze", condition: 70, color: "pink" },

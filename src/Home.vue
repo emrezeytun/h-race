@@ -88,6 +88,9 @@ export default {
   &-horse {
     &-list {
       width: 20vw;
+      height: 85vh;
+      max-height: 85vh;
+      overflow: auto;
     }
     &-race {
       width: 50vw;
