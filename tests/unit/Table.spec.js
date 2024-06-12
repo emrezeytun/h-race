@@ -1,7 +1,7 @@
 import { shallowMount } from "@vue/test-utils";
-import { Table } from "../../src/components";
+import { Table } from "@/components";
 
-describe("Table.vue", () => {
+describe("Table", () => {
   const columnFields = [
     { key: "name", title: "Name" },
     { key: "condition", title: "Condition" },

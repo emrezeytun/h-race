@@ -1,6 +1,6 @@
 import { shallowMount, createLocalVue } from "@vue/test-utils";
 import Vuex from "vuex";
-import { Table, HorseList } from "../../src/components";
+import { Table, HorseList } from "@/components";
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
