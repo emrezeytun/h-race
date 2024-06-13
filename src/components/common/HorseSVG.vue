@@ -46,74 +46,56 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Vue, Component, Prop } from 'vue-property-decorator';
 import store from '@/store';
-export default {
-  name: 'HorseSVG',
-  data() {
-    return {
-      totalDistance: 0,
-      newInterval: '',
-    };
-  },
-  components: {},
-  props: {
-    color: {
-      type: String,
-      default: '#000',
-    },
-    id: {
-      type: Number,
-      default: 0,
-    },
-    itemSpeed: {
-      type: Number,
-      default: 0,
-    },
-    currentLapIndex: {
-      type: Number,
-      default: 0,
-    },
-  },
+
+@Component
+export default class HorseSVG extends Vue {
+  @Prop({ default: '#000' }) color!: string;
+  @Prop({ default: 0 }) id!: number;
+  @Prop({ default: 0 }) itemSpeed!: number;
+  @Prop({ default: 0 }) currentLapIndex!: number;
+  @Prop({ default: 0 }) condition!: number;
+
+  totalDistance: number = 0;
+  newInterval: number | undefined;
+
   created() {
-    this.newInterval = setInterval(this.raceInterval, 10);
-  },
-  methods: {
-    raceInterval() {
-      if (this.isRaceStarted) {
-        if (this.totalDistance < 100) {
-          this.totalDistance += this.itemSpeed / 3;
-        } else {
-          store.commit('pushHorseToResults', {
-            horseId: this.id,
-            lapIndex: this.currentLapIndex,
-          });
-          this.scrollBottomOnTable();
-          this.raceClearInterval();
-        }
+    this.newInterval = window.setInterval(this.raceInterval, 10);
+  }
+
+  raceInterval() {
+    if (this.isRaceStarted) {
+      if (this.totalDistance < 100) {
+        this.totalDistance += (this.itemSpeed / 3) + (this.condition / 100);
+      } else {
+        store.commit('pushHorseToResults', {
+          horseId: this.id,
+          lapIndex: this.currentLapIndex,
+        });
+        this.scrollBottomOnTable();
+        this.raceClearInterval();
       }
-    },
+    }
+  }
 
-    scrollBottomOnTable() {
-      const tableElement = document.querySelector('.result-table-area');
-      tableElement.scrollTop = tableElement.scrollHeight;
-    },
+  scrollBottomOnTable() {
+    const tableElement = document.querySelector('.result-table-area') as HTMLElement;
+    tableElement.scrollTop = tableElement.scrollHeight;
+  }
 
-    raceClearInterval() {
+  raceClearInterval() {
+    if (this.newInterval) {
       clearInterval(this.newInterval);
-    },
-  },
-  computed: {
-    isRaceStarted() {
-      return this.$store.state.isRaceStarted;
-    },
-  },
-  watch: {
-    isRaceStarted(val) {
-      console.log(val);
-    },
-  },
-};
+    }
+  }
+
+  get isRaceStarted() {
+    return this.$store.state.isRaceStarted;
+  }
+
+}
 </script>
 
 <style lang="scss">

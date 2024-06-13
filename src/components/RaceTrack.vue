@@ -15,6 +15,7 @@
           :color="program.color"
           :itemSpeed="program.itemSpeed"
           :currentLapIndex="currentLapIndex"
+          :condition="program.condition"
         />
       </div>
     </div>
@@ -24,44 +25,43 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
 import HorseSVG from './common/HorseSVG.vue';
 import { distances } from '../constants';
-export default {
-  name: 'RaceTrack',
-  components: { HorseSVG },
 
-  data() {
-    return {
-      itemSpeed: 5,
-      newInterval: '',
-      distances,
-    };
-  },
-  created() {},
-  methods: {},
-  computed: {
-    getPrograms() {
-      return this.$store.state.lapItems.program[this.currentLapIndex].rowData;
-    },
-    getLapItemName() {
-      return this.$store.state.lapItems.program[this.currentLapIndex].itemName;
-    },
-    getLapDistance() {
-      return this.$store.state.lapItems.program[this.currentLapIndex].distance;
-    },
-    currentLapIndex() {
-      return this.$store.state.currentLapIndex;
-    },
-  },
-  watch: {
-    currentLapIndex: {
-      handler(newValue) {
-        console.log('newValue:', newValue);
-      },
-    },
-  },
-};
+@Component({
+  components: { HorseSVG },
+})
+export default class RaceTrack extends Vue {
+  itemSpeed: number = 5;
+  newInterval: number | undefined;
+  distances: number[] = distances;
+
+  get getPrograms() {
+    return this.$store.state.lapItems.program[this.currentLapIndex].rowData;
+  }
+
+  get getLapItemName() {
+    return this.$store.state.lapItems.program[this.currentLapIndex].itemName;
+  }
+
+  get getLapDistance() {
+    return this.$store.state.lapItems.program[this.currentLapIndex].distance;
+  }
+
+  get currentLapIndex() {
+    return this.$store.state.currentLapIndex;
+  }
+
+  watchCurrentLapIndex(newValue: number) {
+    console.log('newValue:', newValue);
+  }
+
+  created() {
+    this.$watch('currentLapIndex', this.watchCurrentLapIndex);
+  }
+}
 </script>
 
 <style lang="scss">

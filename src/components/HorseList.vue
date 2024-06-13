@@ -6,31 +6,26 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue';
+import Component from 'vue-class-component';
 import { Table } from './index';
 
-export default {
-  name: 'HorseList',
-  components: { Table },
-  data() {
-    return {
-      columnFields: [
-        { key: 'id', title: 'Id', width: '30px' },
-        { key: 'name', title: 'Name', width: '150px' },
-        { key: 'condition', title: 'Con.', width: '50px' },
-        { key: 'color', title: '', width: '15px' },
-      ],
-    };
-  },
-  created() {
-    console.log('this.$store.state.horseList', this.$store.state.horseList);
-  },
-  computed: {
-    horseList() {
-      return this.$store.state.horseList;
-    },
-  },
-};
+@Component({
+  components: { Table }
+})
+export default class HorseList extends Vue {
+  columnFields = [
+    { key: 'id', title: 'Id', width: '30px' },
+    { key: 'name', title: 'Name', width: '150px' },
+    { key: 'condition', title: 'Con.', width: '50px' },
+    { key: 'color', title: '', width: '15px' },
+  ];
+
+  get horseList() {
+    return this.$store.state.horseList;
+  }
+}
 </script>
 
 <style lang="scss">

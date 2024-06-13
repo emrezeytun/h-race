@@ -22,3 +22,15 @@ export interface State {
   isRaceFinished: boolean;
   currentLapIndex: number;
 }
+
+export interface ColumnField {
+    key: string;
+    title: string;
+    width?: string;
+  }
+
+ export interface RowData {
+    name: string;
+    [key: string]: any;
+    color?: string;
+  }

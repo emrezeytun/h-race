@@ -39,40 +39,37 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
 import { HorseList, HorseLap, RaceTrack, Header } from './components';
 import store from '@/store';
 import { lapSize } from './constants';
 
-export default {
-  name: 'App',
+@Component({
   components: { HorseList, HorseLap, RaceTrack, Header },
-  data() {
-    return {
-      lapSize,
-    };
-  },
-  computed: {
-    horseProgramList() {
-      return this.$store.state.lapItems.program;
-    },
-    horseResultsList() {
-      return this.$store.state.lapItems.results;
-    },
-  },
-  methods: {
-    updateLapData() {
-      for (let i = 0; i < this.lapSize; i++) {
-        store.dispatch('getRandomHorse', 10).then((randomHorses) => {
-          store.commit('updateLapItem', {
-            lapIndex: i,
-            horses: randomHorses,
-          });
+})
+export default class App extends Vue {
+  lapSize = lapSize;
+
+  get horseProgramList() {
+    return this.$store.state.lapItems.program;
+  }
+
+  get horseResultsList() {
+    return this.$store.state.lapItems.results;
+  }
+
+  updateLapData() {
+    for (let i = 0; i < this.lapSize; i++) {
+      store.dispatch('getRandomHorse', 10).then((randomHorses) => {
+        store.commit('updateLapItem', {
+          lapIndex: i,
+          horses: randomHorses,
         });
-      }
-    },
-  },
-};
+      });
+    }
+  }
+}
 </script>
 
 <style lang="scss">

@@ -11,9 +11,7 @@
       </button>
 
       <button
-        @click="
-          isRaceFinished ? playAgain() : startRace(isRaceStarted ? false : true)
-        "
+        @click="isRaceFinished ? playAgain() : startRace(isRaceStarted ? false : true)"
         class="horse-header-actions-item"
         :class="getPrograms.length ? '' : 'disable'"
       >
@@ -23,48 +21,46 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
 import store from '@/store';
 import { lapSize } from '../constants';
 
-export default {
-  name: 'HorseHeader',
-  components: {},
-  data() {
-    return {
-      lapSize,
-    };
-  },
-  computed: {
-    getPrograms() {
-      return this.$store.state.lapItems.program[0].rowData;
-    },
-    isRaceStarted() {
-      return this.$store.state.isRaceStarted;
-    },
-    isRaceFinished() {
-      return this.$store.state.isRaceFinished;
-    },
-  },
-  methods: {
-    updateLapData() {
-      for (let i = 0; i < this.lapSize; i++) {
-        store.dispatch('getRandomHorse', 10).then((randomHorses) => {
-          store.commit('updateLapItem', {
-            lapIndex: i,
-            horses: randomHorses,
-          });
+@Component
+export default class HorseHeader extends Vue {
+  lapSize: number = lapSize;
+
+  get getPrograms() {
+    return this.$store.state.lapItems.program[0].rowData;
+  }
+
+  get isRaceStarted() {
+    return this.$store.state.isRaceStarted;
+  }
+
+  get isRaceFinished() {
+    return this.$store.state.isRaceFinished;
+  }
+
+  updateLapData() {
+    for (let i = 0; i < this.lapSize; i++) {
+      store.dispatch('getRandomHorse', 10).then((randomHorses: any) => {
+        store.commit('updateLapItem', {
+          lapIndex: i,
+          horses: randomHorses,
         });
-      }
-    },
-    playAgain() {
-      store.commit('playAgain');
-    },
-    startRace(status) {
-      store.commit('setRaceStarted', status);
-    },
-  },
-};
+      });
+    }
+  }
+
+  playAgain() {
+    store.commit('playAgain');
+  }
+
+  startRace(status: boolean) {
+    store.commit('setRaceStarted', status);
+  }
+}
 </script>
 
 <style lang="scss" scoped>

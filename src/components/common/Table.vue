@@ -37,30 +37,16 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'TableComponent',
-  components: {},
-  props: {
-    columnFields: {
-      type: Array,
-      default: () => [
-        {
-          key: '',
-          title: '',
-        },
-      ],
-    },
-    rowData: {
-      type: Array,
-      default: () => [
-        {
-          name: '',
-        },
-      ],
-    },
-  },
-};
+<script lang="ts">
+import { Component, Vue, Prop } from 'vue-property-decorator';
+import {ColumnField, RowData} from '@/types'
+
+
+@Component
+export default class TableComponent extends Vue {
+  @Prop({ type: Array, default: () => [] }) columnFields!: ColumnField[];
+  @Prop({ type: Array, default: () => [] }) rowData!: RowData[];
+}
 </script>
 
 <style lang="scss">

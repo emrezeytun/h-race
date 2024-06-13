@@ -28,38 +28,26 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue, Prop } from 'vue-property-decorator';
 import { Table } from './index';
-export default {
-  name: 'HorseProgram',
+import {ColumnField, LapItem} from '@/types'
+
+
+@Component({
   components: { Table },
-  data() {
-    return {
-      columnFields: [
-        { key: 'position', title: 'Pos.', width: '40px' },
-        { key: 'name', title: 'Name' },
-      ],
-    };
-  },
-  props: {
-    lapTitle: {
-      type: String,
-      default: 'Program',
-    },
-    type: {
-      type: String,
-      default: 'program',
-    },
-    lapBackground: {
-      type: String,
-      default: 'rgb(232, 232, 6)',
-    },
-    lapItems: {
-      type: Array,
-      default: () => [],
-    },
-  },
-};
+})
+export default class HorseProgram extends Vue {
+  columnFields: ColumnField[] = [
+    { key: 'position', title: 'Pos.', width: '40px' },
+    { key: 'name', title: 'Name' },
+  ];
+
+  @Prop({ type: String, default: 'Program' }) lapTitle!: string;
+  @Prop({ type: String, default: 'program' }) type!: string;
+  @Prop({ type: String, default: 'rgb(232, 232, 6)' }) lapBackground!: string;
+  @Prop({ type: Array, default: () => [] }) lapItems!: LapItem[];
+}
 </script>
 
 <style lang="scss">
