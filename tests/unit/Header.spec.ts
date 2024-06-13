@@ -1,13 +1,23 @@
-import { shallowMount, createLocalVue } from "@vue/test-utils";
-import Vuex from "vuex";
-import {Header} from "@/components";
+import { shallowMount, createLocalVue, Wrapper } from "@vue/test-utils";
+import Vuex, { Store } from "vuex";
+import { Header } from "@/components";
+import { ComponentOptions } from "vue";
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
+interface State {
+  lapItems: {
+    program: { rowData: Array<any> }[];
+  };
+  isRaceStarted: boolean;
+  isRaceFinished: boolean;
+}
+
 describe("Header", () => {
-  let store;
-  let state;
+  let store: Store<State>;
+  let state: State;
+
   beforeEach(() => {
     state = {
       lapItems: {
@@ -17,14 +27,13 @@ describe("Header", () => {
       isRaceFinished: false,
     };
 
-  
     store = new Vuex.Store({
       state,
     });
   });
 
   it("renders correctly with data from the store", () => {
-    const wrapper = shallowMount(Header, {
+    const wrapper: Wrapper<Vue> = shallowMount(Header as ComponentOptions<Vue>, {
       localVue,
       store,
     });
@@ -38,7 +47,7 @@ describe("Header", () => {
 
   it("disables 'Generate Program' button when race is started or program exists", () => {
     state.isRaceStarted = true;
-    const wrapper = shallowMount(Header, {
+    const wrapper: Wrapper<Vue> = shallowMount(Header as ComponentOptions<Vue>, {
       localVue,
       store,
     });
@@ -48,7 +57,7 @@ describe("Header", () => {
 
     state.isRaceStarted = false;
     state.lapItems.program[0].rowData = [{ id: 1, name: "Horse 1" }];
-    const wrapperWithProgram = shallowMount(Header, {
+    const wrapperWithProgram: Wrapper<Vue> = shallowMount(Header as ComponentOptions<Vue>, {
       localVue,
       store,
     });
@@ -56,6 +65,4 @@ describe("Header", () => {
     const generateButtonWithProgram = wrapperWithProgram.find("button:first-child");
     expect(generateButtonWithProgram.classes()).toContain("disable");
   });
-
-
 });

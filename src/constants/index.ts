@@ -1,10 +1,13 @@
-const distances = [1200, 1400, 1600, 1800, 2000, 2200];
+import { Horse } from "@/types";
 
-const lapSize = distances.length;
+const distances: number[] = [1200, 1400, 1600, 1800, 2000, 2200];
 
-const horseCountPerLap = 10;
+const lapSize: number = distances.length;
 
-const horseList = [
+const horseCountPerLap: number = 10;
+
+
+const horseList: Horse[] = [
   { id: 101, name: "Mystic Shadow", condition: 55, color: "blue" },
   { id: 102, name: "Obsidian Heart", condition: 43, color: "green" },
   { id: 103, name: "Eclipse Moon", condition: 35, color: "black" },
@@ -27,4 +30,4 @@ const horseList = [
   { id: 120, name: "Lightning Dash", condition: 53, color: "red" },
 ];
 
-export { distances, lapSize, horseList, horseCountPerLap };
+export { distances, lapSize, horseList, horseCountPerLap, Horse };

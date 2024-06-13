@@ -1,15 +1,28 @@
-import { shallowMount, createLocalVue } from "@vue/test-utils";
-import Vuex from "vuex";
-import {RaceTrack, HorseList, HorseLap, Header} from "@/components";
-import Home from '../../src/Home'
-
+import { shallowMount, createLocalVue, Wrapper } from "@vue/test-utils";
+import Vuex, { Store } from "vuex";
+import { RaceTrack, HorseList, HorseLap, Header } from "@/components";
+import Home from '../../src/Home.vue';
+import Vue from 'vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
+interface ProgramItem {
+  rowData: Array<any>;
+  itemName: string;
+  distance: number;
+}
+
+interface State {
+  lapItems: {
+    program: ProgramItem[];
+    results: Array<any>;
+  };
+}
+
 describe("Home", () => {
-  let store;
-  let state;
+  let store: Store<State>;
+  let state: State;
 
   beforeEach(() => {
     state = {
@@ -28,7 +41,7 @@ describe("Home", () => {
   });
 
   it("renders correctly with components and data", () => {
-    const wrapper = shallowMount(Home, {
+    const wrapper: Wrapper<Vue> = shallowMount(Home, {
       localVue,
       store,
     });
@@ -40,7 +53,7 @@ describe("Home", () => {
   });
 
   it("displays 'Generate Program' button when no program data", () => {
-    const wrapper = shallowMount(Home, {
+    const wrapper: Wrapper<Vue> = shallowMount(Home, {
       localVue,
       store,
     });
@@ -52,7 +65,7 @@ describe("Home", () => {
 
   it("renders RaceTrack component when program data exists", () => {
     state.lapItems.program[0].rowData = [{ id: 1, name: "Horse 1" }];
-    const wrapper = shallowMount(Home, {
+    const wrapper: Wrapper<Vue> = shallowMount(Home, {
       localVue,
       store,
     });
@@ -60,6 +73,4 @@ describe("Home", () => {
     expect(wrapper.findComponent(RaceTrack).exists()).toBe(true);
     expect(wrapper.find(".horse-racing-horse-race-generate").exists()).toBe(false);
   });
-
- 
 });

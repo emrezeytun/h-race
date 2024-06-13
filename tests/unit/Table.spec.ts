@@ -1,21 +1,33 @@
-import { shallowMount } from "@vue/test-utils";
+import { shallowMount, Wrapper } from "@vue/test-utils";
 import { Table } from "@/components";
+import Vue from 'vue';
+
+interface ColumnField {
+  key: string;
+  title: string;
+}
+
+interface RowData {
+  name: string;
+  condition: number;
+  color: string;
+}
 
 describe("Table", () => {
-  const columnFields = [
+  const columnFields: ColumnField[] = [
     { key: "name", title: "Name" },
     { key: "condition", title: "Condition" },
     { key: "color", title: "Color" },
   ];
 
-  const rowData = [
+  const rowData: RowData[] = [
     { name: "Horse 1", condition: 50, color: "red" },
     { name: "Horse 2", condition: 30, color: "white" },
     { name: "Horse 3", condition: 70, color: "black" },
   ];
 
   it("renders the table headers correctly", () => {
-    const wrapper = shallowMount(Table, {
+    const wrapper: Wrapper<Vue> = shallowMount(Table, {
       propsData: { columnFields, rowData },
     });
 
@@ -28,7 +40,7 @@ describe("Table", () => {
   });
 
   it("applies the correct border color", () => {
-    const wrapper = shallowMount(Table, {
+    const wrapper: Wrapper<Vue> = shallowMount(Table, {
       propsData: { columnFields, rowData },
     });
 

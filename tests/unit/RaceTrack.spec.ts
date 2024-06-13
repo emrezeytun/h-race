@@ -1,13 +1,34 @@
-import { shallowMount, createLocalVue } from "@vue/test-utils";
-import Vuex from "vuex";
-import {RaceTrack, HorseSVG} from "@/components";
+import { shallowMount, createLocalVue, Wrapper } from "@vue/test-utils";
+import Vuex, { Store } from "vuex";
+import { RaceTrack, HorseSVG } from "@/components";
+import Vue from 'vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
+interface Horse {
+  id: number;
+  name: string;
+  color: string;
+  itemSpeed: number;
+}
+
+interface ProgramItem {
+  rowData: Horse[];
+  itemName: string;
+  distance: number;
+}
+
+interface State {
+  lapItems: {
+    program: ProgramItem[];
+  };
+  currentLapIndex: number;
+}
+
 describe("RaceTrack", () => {
-  let store;
-  let state;
+  let store: Store<State>;
+  let state: State;
 
   beforeEach(() => {
     state = {
@@ -33,7 +54,7 @@ describe("RaceTrack", () => {
   });
 
   it("renders correctly with data from the store", () => {
-    const wrapper = shallowMount(RaceTrack, {
+    const wrapper: Wrapper<Vue> = shallowMount(RaceTrack, {
       localVue,
       store,
     });
@@ -52,7 +73,7 @@ describe("RaceTrack", () => {
   });
 
   it("renders the correct lap item name", () => {
-    const wrapper = shallowMount(RaceTrack, {
+    const wrapper: Wrapper<Vue> = shallowMount(RaceTrack, {
       localVue,
       store,
     });
@@ -61,5 +82,4 @@ describe("RaceTrack", () => {
     expect(lapItemName.exists()).toBe(true);
     expect(lapItemName.text()).toBe(state.lapItems.program[state.currentLapIndex].itemName);
   });
-
 });

@@ -1,8 +1,14 @@
-import { shallowMount } from "@vue/test-utils";
-import {HorseLap, Table} from "@/components";
+import { shallowMount, Wrapper } from "@vue/test-utils";
+import { HorseLap, Table } from "@/components";
+import Vue from 'vue';
+
+interface LapItem {
+  itemName: string;
+  rowData: Array<{ position: number; name: string }>;
+}
 
 describe("HorseLap", () => {
-  const lapItems = [
+  const lapItems: LapItem[] = [
     {
       itemName: "Program 1",
       rowData: [
@@ -20,7 +26,7 @@ describe("HorseLap", () => {
   ];
 
   it("renders correctly with props", () => {
-    const wrapper = shallowMount(HorseLap, {
+    const wrapper: Wrapper<Vue> = shallowMount(HorseLap, {
       propsData: {
         lapTitle: "Test Program",
         type: "program",
@@ -34,7 +40,7 @@ describe("HorseLap", () => {
   });
 
   it("renders the correct number of lap items", () => {
-    const wrapper = shallowMount(HorseLap, {
+    const wrapper: Wrapper<Vue> = shallowMount(HorseLap, {
       propsData: {
         lapItems,
       },
@@ -44,16 +50,15 @@ describe("HorseLap", () => {
     expect(lapTables).toHaveLength(lapItems.length);
   });
 
-
   it("does not render Table component when rowData is empty", () => {
-    const emptyLapItems = [
+    const emptyLapItems: LapItem[] = [
       {
         itemName: "Empty Program",
         rowData: [],
       },
     ];
 
-    const wrapper = shallowMount(HorseLap, {
+    const wrapper: Wrapper<Vue> = shallowMount(HorseLap, {
       propsData: {
         lapItems: emptyLapItems,
       },
