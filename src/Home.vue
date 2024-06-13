@@ -40,12 +40,12 @@
 </template>
 
 <script>
-import { HorseList, HorseLap, RaceTrack, Header } from "./components";
-import store from "@/store";
-import { lapSize } from "./constants";
+import { HorseList, HorseLap, RaceTrack, Header } from './components';
+import store from '@/store';
+import { lapSize } from './constants';
 
 export default {
-  name: "App",
+  name: 'App',
   components: { HorseList, HorseLap, RaceTrack, Header },
   data() {
     return {
@@ -63,8 +63,8 @@ export default {
   methods: {
     updateLapData() {
       for (let i = 0; i < this.lapSize; i++) {
-        store.dispatch("getRandomHorse", 10).then((randomHorses) => {
-          store.commit("updateLapItem", {
+        store.dispatch('getRandomHorse', 10).then((randomHorses) => {
+          store.commit('updateLapItem', {
             lapIndex: i,
             horses: randomHorses,
           });

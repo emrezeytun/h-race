@@ -7,23 +7,23 @@
 </template>
 
 <script>
-import { Table } from "./index";
+import { Table } from './index';
 
 export default {
-  name: "HorseList",
+  name: 'HorseList',
   components: { Table },
   data() {
     return {
       columnFields: [
-        { key: "id", title: "Id", width: "30px" },
-        { key: "name", title: "Name", width: "150px" },
-        { key: "condition", title: "Con.", width: "50px" },
-        { key: "color", title: "", width: "15px" },
+        { key: 'id', title: 'Id', width: '30px' },
+        { key: 'name', title: 'Name', width: '150px' },
+        { key: 'condition', title: 'Con.', width: '50px' },
+        { key: 'color', title: '', width: '15px' },
       ],
     };
   },
   created() {
-    console.log("this.$store.state.horseList", this.$store.state.horseList);
+    console.log('this.$store.state.horseList', this.$store.state.horseList);
   },
   computed: {
     horseList() {

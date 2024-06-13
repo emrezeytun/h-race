@@ -17,18 +17,18 @@
         class="horse-header-actions-item"
         :class="getPrograms.length ? '' : 'disable'"
       >
-        {{ isRaceFinished ? "Play Again" : isRaceStarted ? "Pause" : "Start" }}
+        {{ isRaceFinished ? 'Play Again' : isRaceStarted ? 'Pause' : 'Start' }}
       </button>
     </div>
   </div>
 </template>
 
 <script>
-import store from "@/store";
-import { lapSize } from "../constants";
+import store from '@/store';
+import { lapSize } from '../constants';
 
 export default {
-  name: "HorseHeader",
+  name: 'HorseHeader',
   components: {},
   data() {
     return {
@@ -49,8 +49,8 @@ export default {
   methods: {
     updateLapData() {
       for (let i = 0; i < this.lapSize; i++) {
-        store.dispatch("getRandomHorse", 10).then((randomHorses) => {
-          store.commit("updateLapItem", {
+        store.dispatch('getRandomHorse', 10).then((randomHorses) => {
+          store.commit('updateLapItem', {
             lapIndex: i,
             horses: randomHorses,
           });
@@ -58,10 +58,10 @@ export default {
       }
     },
     playAgain() {
-      store.commit("playAgain");
+      store.commit('playAgain');
     },
     startRace(status) {
-      store.commit("setRaceStarted", status);
+      store.commit('setRaceStarted', status);
     },
   },
 };

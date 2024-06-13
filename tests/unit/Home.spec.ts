@@ -1,6 +1,6 @@
-import { shallowMount, createLocalVue, Wrapper } from "@vue/test-utils";
-import Vuex, { Store } from "vuex";
-import { RaceTrack, HorseList, HorseLap, Header } from "@/components";
+import { shallowMount, createLocalVue, Wrapper } from '@vue/test-utils';
+import Vuex, { Store } from 'vuex';
+import { RaceTrack, HorseList, HorseLap, Header } from '@/components';
 import Home from '../../src/Home.vue';
 import Vue from 'vue';
 
@@ -20,7 +20,7 @@ interface State {
   };
 }
 
-describe("Home", () => {
+describe('Home', () => {
   let store: Store<State>;
   let state: State;
 
@@ -28,8 +28,8 @@ describe("Home", () => {
     state = {
       lapItems: {
         program: [
-          { rowData: [], itemName: "Program 1", distance: 1000 },
-          { rowData: [], itemName: "Program 2", distance: 1200 },
+          { rowData: [], itemName: 'Program 1', distance: 1000 },
+          { rowData: [], itemName: 'Program 2', distance: 1200 },
         ],
         results: [],
       },
@@ -40,7 +40,7 @@ describe("Home", () => {
     });
   });
 
-  it("renders correctly with components and data", () => {
+  it('renders correctly with components and data', () => {
     const wrapper: Wrapper<Vue> = shallowMount(Home, {
       localVue,
       store,
@@ -58,19 +58,21 @@ describe("Home", () => {
       store,
     });
 
-    const generateButton = wrapper.find(".horse-racing-horse-race-generate");
+    const generateButton = wrapper.find('.horse-racing-horse-race-generate');
     expect(generateButton.exists()).toBe(true);
-    expect(generateButton.text()).toBe("Generate Program");
+    expect(generateButton.text()).toBe('Generate Program');
   });
 
-  it("renders RaceTrack component when program data exists", () => {
-    state.lapItems.program[0].rowData = [{ id: 1, name: "Horse 1" }];
+  it('renders RaceTrack component when program data exists', () => {
+    state.lapItems.program[0].rowData = [{ id: 1, name: 'Horse 1' }];
     const wrapper: Wrapper<Vue> = shallowMount(Home, {
       localVue,
       store,
     });
 
     expect(wrapper.findComponent(RaceTrack).exists()).toBe(true);
-    expect(wrapper.find(".horse-racing-horse-race-generate").exists()).toBe(false);
+    expect(wrapper.find('.horse-racing-horse-race-generate').exists()).toBe(
+      false
+    );
   });
 });

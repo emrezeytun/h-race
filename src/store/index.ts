@@ -1,7 +1,7 @@
-import Vue from "vue";
-import Vuex, { StoreOptions } from "vuex";
-import { horseList, distances, horseCountPerLap, lapSize } from "../constants";
-import { Horse, State } from "@/types"; 
+import Vue from 'vue';
+import Vuex, { StoreOptions } from 'vuex';
+import { horseList, distances, horseCountPerLap, lapSize } from '../constants';
+import { Horse, State } from '@/types';
 
 Vue.use(Vuex);
 
@@ -28,15 +28,21 @@ const mutations = {
     state.lapItems!.program[payload.lapIndex].rowData = payload.horses;
   },
 
-  pushHorseToResults(state: State, payload: { horseId: number; lapIndex: number }) {
-    const horse = state.horseList.find(h => h.id === payload.horseId);
+  pushHorseToResults(
+    state: State,
+    payload: { horseId: number; lapIndex: number }
+  ) {
+    const horse = state.horseList.find((h) => h.id === payload.horseId);
     if (horse) {
       state.lapItems!.results[payload.lapIndex].rowData.push({
         ...horse,
         position: state.lapItems!.results[payload.lapIndex].rowData.length + 1,
       });
 
-      if (state.lapItems!.results[payload.lapIndex].rowData.length === horseCountPerLap) {
+      if (
+        state.lapItems!.results[payload.lapIndex].rowData.length ===
+        horseCountPerLap
+      ) {
         state.currentLapIndex += 1;
       }
 
@@ -51,11 +57,11 @@ const mutations = {
   },
 
   playAgain(state: State) {
-    state.lapItems!.program = state.lapItems!.program.map(i => ({
+    state.lapItems!.program = state.lapItems!.program.map((i) => ({
       ...i,
       rowData: [],
     }));
-    state.lapItems!.results = state.lapItems!.results.map(i => ({
+    state.lapItems!.results = state.lapItems!.results.map((i) => ({
       ...i,
       rowData: [],
     }));
@@ -66,7 +72,10 @@ const mutations = {
 };
 
 const actions = {
-  async getRandomHorse({ state }: { state: State }, size: number): Promise<Horse[]> {
+  async getRandomHorse(
+    { state }: { state: State },
+    size: number
+  ): Promise<Horse[]> {
     const horses = [...state.horseList]
       .sort(() => 0.5 - Math.random())
       .slice(0, size)

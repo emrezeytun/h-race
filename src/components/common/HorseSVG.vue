@@ -47,20 +47,20 @@
 </template>
 
 <script>
-import store from "@/store";
+import store from '@/store';
 export default {
-  name: "HorseSVG",
+  name: 'HorseSVG',
   data() {
     return {
       totalDistance: 0,
-      newInterval: "",
+      newInterval: '',
     };
   },
   components: {},
   props: {
     color: {
       type: String,
-      default: "#000",
+      default: '#000',
     },
     id: {
       type: Number,
@@ -84,7 +84,7 @@ export default {
         if (this.totalDistance < 100) {
           this.totalDistance += this.itemSpeed / 3;
         } else {
-          store.commit("pushHorseToResults", {
+          store.commit('pushHorseToResults', {
             horseId: this.id,
             lapIndex: this.currentLapIndex,
           });
@@ -95,7 +95,7 @@ export default {
     },
 
     scrollBottomOnTable() {
-      const tableElement = document.querySelector(".result-table-area");
+      const tableElement = document.querySelector('.result-table-area');
       tableElement.scrollTop = tableElement.scrollHeight;
     },
 

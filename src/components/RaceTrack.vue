@@ -25,16 +25,16 @@
 </template>
 
 <script>
-import HorseSVG from "./common/HorseSVG.vue";
-import { distances } from "../constants";
+import HorseSVG from './common/HorseSVG.vue';
+import { distances } from '../constants';
 export default {
-  name: "RaceTrack",
+  name: 'RaceTrack',
   components: { HorseSVG },
 
   data() {
     return {
       itemSpeed: 5,
-      newInterval: "",
+      newInterval: '',
       distances,
     };
   },
@@ -57,7 +57,7 @@ export default {
   watch: {
     currentLapIndex: {
       handler(newValue) {
-        console.log("newValue:", newValue);
+        console.log('newValue:', newValue);
       },
     },
   },

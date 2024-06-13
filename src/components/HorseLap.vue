@@ -29,30 +29,30 @@
 </template>
 
 <script>
-import { Table } from "./index";
+import { Table } from './index';
 export default {
-  name: "HorseProgram",
+  name: 'HorseProgram',
   components: { Table },
   data() {
     return {
       columnFields: [
-        { key: "position", title: "Pos.", width: "40px" },
-        { key: "name", title: "Name" },
+        { key: 'position', title: 'Pos.', width: '40px' },
+        { key: 'name', title: 'Name' },
       ],
     };
   },
   props: {
     lapTitle: {
       type: String,
-      default: "Program",
+      default: 'Program',
     },
     type: {
       type: String,
-      default: "program",
+      default: 'program',
     },
     lapBackground: {
       type: String,
-      default: "rgb(232, 232, 6)",
+      default: 'rgb(232, 232, 6)',
     },
     lapItems: {
       type: Array,

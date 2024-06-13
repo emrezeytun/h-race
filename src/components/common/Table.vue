@@ -29,7 +29,7 @@
             v-for="(column, index) in columnFields"
             :key="column.key"
           >
-            {{ column.key === "color" ? "" : data[column.key] }}
+            {{ column.key === 'color' ? '' : data[column.key] }}
           </td>
         </tr>
       </tbody>
@@ -39,15 +39,15 @@
 
 <script>
 export default {
-  name: "TableComponent",
+  name: 'TableComponent',
   components: {},
   props: {
     columnFields: {
       type: Array,
       default: () => [
         {
-          key: "",
-          title: "",
+          key: '',
+          title: '',
         },
       ],
     },
@@ -55,7 +55,7 @@ export default {
       type: Array,
       default: () => [
         {
-          name: "",
+          name: '',
         },
       ],
     },
